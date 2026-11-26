@@ -8,6 +8,9 @@ import { join } from "node:path";
 // and not the first obvious word anyone reaches for.
 const WORD = "doomscrolling";
 
+// Guard: the entry must be exactly one word — no whitespace, no newline.
+if (/\s/.test(WORD)) throw new Error("entry must be a single word");
+
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 mkdirSync(outDir, { recursive: true });
 writeFileSync(join(outDir, "entry.txt"), WORD, "utf8");
